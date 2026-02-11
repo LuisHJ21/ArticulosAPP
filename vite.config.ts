@@ -15,6 +15,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/articulos\/api/, ""),
       },
     },
+   
   },
+  base: '/articulos/',
   plugins: [react(), tailwindcss()],
 })

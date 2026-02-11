@@ -58,9 +58,7 @@ export const Buscardor = () => {
               <h1 className="text-2xl font-black text-white tracking-tight">INVENTARIO<span className="text-blue-500">APP</span></h1>
               <span className="text-xs text-slate-400 uppercase tracking-widest">Sistema de Gestión de Almacén</span>
             </div>
-            <div className="w-10 h-10 bg-slate-700 rounded-xl flex justify-center items-center border border-slate-600">
-              <span className="font-bold text-blue-400">LH</span>
-            </div>
+            
           </div>
 
           <div className="flex items-center bg-slate-900 rounded-2xl border border-slate-700 px-4 h-14 shadow-inner">
@@ -71,7 +69,10 @@ export const Buscardor = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <X size={20} className="text-slate-500 mr-3" onClick={cancelSearch}/>
+            {
+              searchTerm.length>0&&(<X size={20} className="text-slate-500 mr-3" onClick={cancelSearch}/>)
+            }
+            
           </div>
         </div>
 
