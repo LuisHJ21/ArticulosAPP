@@ -1,7 +1,7 @@
-import type { Almacenes, Articulos, Ubicaciones } from "../interfaces";
+import type { Almacenes, Articulos } from "../interfaces";
 import type { AlmacenDB } from "../interfaces/almacenes.interface";
 import type { ArticuloDB } from "../interfaces/articulosSearch.interface";
-import type { UbicacionesDB } from "../interfaces/ubicaciones.interface";
+//import type { UbicacionesDB } from "../interfaces/ubicaciones.interface";
 
 export class ArticuloMapper {
     static toArticulo(articulo: ArticuloDB): Articulos {
@@ -24,15 +24,15 @@ export class ArticuloMapper {
         }
     }
     
-    static toUbicaciones(ubicaciones: UbicacionesDB): Ubicaciones {
+    /*static toUbicaciones(ubicaciones: UbicacionesDB): Ubicaciones {
         return {
-            pallet:ubicaciones.NUM_PALLET??'',
-            item:ubicaciones.ITEM??'',
-            peso:ubicaciones.PESO??'',
-            codigoTraza:ubicaciones.COD_TRAZA??'',
-            fechaProduccion:ubicaciones.FECH_PRODU??'',
-            codigoRack:ubicaciones.COD_RACK??''
+            numPallet:ubicaciones.NUM_PALLET??'',
+        
+            pesoTotal: ubicaciones.PESO??'',
+            codigoTraza: ubicaciones.COD_TRAZA??'',
+            fechaProduccion: ubicaciones.FECH_PRODU??'',
+            codigoRack: ubicaciones.COD_RACK??''
         }
-    }
+    }*/
     
 }

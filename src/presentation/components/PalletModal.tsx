@@ -1,4 +1,4 @@
-import { Box, Calendar, List, MapPin, QrCode, Scale, X } from "lucide-react";
+import { Box, List, MapPin, Scale, X } from "lucide-react";
 import type { Ubicaciones } from "../../infraestructure/interfaces";
 
 interface ModalProps
