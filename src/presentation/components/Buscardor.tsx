@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArticuloService } from '../../core/services/articulo.service';
-import { Search, X } from 'lucide-react';
+import { QrCode, Search, X } from 'lucide-react';
 import type { Articulos } from '../../infraestructure/interfaces';
 import { Card } from './Card';
 
@@ -10,7 +10,14 @@ export const Buscardor = () => {
     const [debounceTerm, setDebounceTerm] = useState("");
     const [articulos, setArticulos] = useState<Articulos[]>([]);
 
-    
+    const [isQrActive, setIsQrActive] = useState(false);
+
+    const searchInputRef = useRef<HTMLInputElement|null>(null);
+
+
+    const handleQrClick = () => {
+        setIsQrActive(!isQrActive);
+    }
 
 
     const cancelSearch = () => {
@@ -49,6 +56,15 @@ export const Buscardor = () => {
         searchProducts(debounceTerm)
     }, [debounceTerm]);
 
+    useEffect(() => {
+        if (isQrActive) {
+          searchInputRef.current?.focus()
+            setSearchTerm("");
+            setDebounceTerm("");
+            setArticulos([]);
+        }
+    }, [isQrActive]);
+
   return (
       <div className="h-screen bg-slate-900 font-sans flex flex-col">
         {/* BUSCADOR */}
@@ -64,16 +80,25 @@ export const Buscardor = () => {
           <div className="flex items-center bg-slate-900 rounded-2xl border border-slate-700 px-4 h-14 shadow-inner">
             <Search size={20} className="text-slate-500 mr-3" />
             <input
+              ref={searchInputRef}
               className="flex-1 bg-transparent text-white text-base outline-none placeholder:text-slate-500"
               placeholder="Buscar por descripción o código"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              maxLength={isQrActive?11:600}
+
+              onBlur={()=>
+                isQrActive&& searchInputRef.current?.focus()
+              }
             />
             {
               searchTerm.length>0&&(<X size={20} className="text-slate-500 mr-3" onClick={cancelSearch}/>)
             }
-            
+             <button onClick={handleQrClick}> <QrCode size={28} className={isQrActive?"text-blue-500 mr-3":"text-slate-500 mr-3"} /></button>
           </div>
+          
+           
+          
         </div>
 
         {/* Lista de Resultados */}
